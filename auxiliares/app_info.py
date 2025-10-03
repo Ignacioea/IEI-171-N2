@@ -1,1 +1,1 @@
-print("hola")
+app_name = "Sistema de Biblioteca"
