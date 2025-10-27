@@ -1,3 +1,8 @@
+from prettytable import PrettyTable
+from datos.obtener_datos import obtener_lista_objetos
+from modelos.usuarios import Usuarios
+
+
 def mostrar_usuarios():
     print("entrando al metodo")
     tabla_usuarios = PrettyTable()
@@ -10,4 +15,3 @@ def mostrar_usuarios():
         print(tabla_usuarios)
     
 
-mostrar_usuarios()

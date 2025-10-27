@@ -1,3 +1,8 @@
+from prettytable import PrettyTable
+from datos.obtener_datos import obtener_lista_objetos
+from modelos.libro import Libro
+
+
 def mostrar_libros():
     print('Preparando tabla')
     tabla_libros = PrettyTable()
@@ -8,5 +13,3 @@ def mostrar_libros():
             tabla_libros.add_row(
                 [libros.id, libros.titulo, libros.editorial, libros.anio_publicacion, libros.categoria, libros.ISBN, libros.id_autor])
         print(tabla_libros)
-
-mostrar_libros()

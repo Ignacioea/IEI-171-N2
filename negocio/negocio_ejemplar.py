@@ -1,3 +1,7 @@
+from prettytable import PrettyTable
+from datos.obtener_datos import obtener_lista_objetos
+from modelos.ejemplar import Ejemplar
+
 def mostrar_ejemplar():
     print('Preparando tabla')
     tabla_ejemplar = PrettyTable()
@@ -9,4 +13,3 @@ def mostrar_ejemplar():
                 [ejemplar.id, ejemplar.codigo, ejemplar.ubicacion, ejemplar.estado, ejemplar.id_libro])
         print(tabla_ejemplar)
             
-mostrar_ejemplar()
