@@ -14,6 +14,8 @@ def mostrar_usuarios():
                 [usuario.id, usuario.nombre, usuario.apellido, usuario.rut, usuario.telefono, usuario.correo, usuario.sancionado, usuario.tipo_usuario])
         print(tabla_usuarios)
 
+
+#faltan opciones de validación para no agregar usuarios erroneos
 def registrar_usuario():
     print("Registro de Nuevo Usuario \n")
     nombre = input("ingrese nombre: ")
