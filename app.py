@@ -3,7 +3,7 @@ from iu.main_menu import main_menu
 
 #importar las funciones de negocio
 from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario
-from negocio.negocio_ejemplar import mostrar_ejemplar
+from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar
 from negocio.negocio_libros import mostrar_libros, registrar_libro
 
 
@@ -15,7 +15,10 @@ from auxiliares.version import version_number
 #main_menu()
 
 
-#mostrar_ejemplar() 
+#mostrar_ejemplar()
+#registrar_ejemplar()
+#modificar_ejemplar() <---- pendiente
+#eliminar_ejemplar() <---- pendiente
 
 #mostrar_usuarios()
 #registrar_usuario()

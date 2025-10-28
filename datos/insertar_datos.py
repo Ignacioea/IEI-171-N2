@@ -1,5 +1,6 @@
 from modelos.usuarios import Usuarios
 from modelos.libro import Libro
+from modelos.ejemplar import Ejemplar
 from datos.conexion import Session
 
 
@@ -42,6 +43,23 @@ def insertar_libro(titulo, editorial, anio, categoria, ISBN, id_autor, id_biblio
     
     except Exception as e:
         sesion.rollback()
-        print(f"error al registrar al usuario {e}")
+        print(f"error al registrar el libro: {e}")
+    finally:
+        sesion.close()
+
+def insertar_ejemplar(codigo, ubicacion, estado, id_libro):
+    nuevo_ejemplar = Ejemplar(
+        codigo = codigo,
+        ubicacion = ubicacion,
+        estado = estado,
+        id_libro = id_libro
+    )
+    sesion.add(nuevo_ejemplar)
+    try:
+        sesion.commit()
+        print(f"el ejemplar {nuevo_ejemplar.codigo} se ha registrado correctamente!.")
+    except Exception as e:
+        sesion.rollback()
+        print(f"error al registrar el ejemplar: {e}")
     finally:
         sesion.close()
