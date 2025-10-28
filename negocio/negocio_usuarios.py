@@ -1,7 +1,7 @@
 from prettytable import PrettyTable
 from datos.obtener_datos import obtener_lista_objetos
 from modelos.usuarios import Usuarios
-from datos.inertar_datos import insertar_usuario
+from datos.insertar_datos import insertar_usuario
 
 
 def mostrar_usuarios():
