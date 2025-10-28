@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS BIBLIOTECA(
     horario_atencion VARCHAR(255) NOT NULL,
     id_sede INTEGER NOT NULL,
     CONSTRAINT pk_biblioteca PRIMARY KEY(id),
-    CONSTRAINT fk_biblioteca_sede FOREIGN KEY(id_sede) REFERENCES SEDE(id),
+    CONSTRAINT fk_biblioteca_sede FOREIGN KEY(id_sede) REFERENCES SEDE(id)
 );
 
 CREATE TABLE IF NOT EXISTS LIBRO(
