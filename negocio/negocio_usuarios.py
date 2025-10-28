@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos
+from datos.obtener_datos import obtener_lista_objetos, obtener_usuario_rut
 from modelos.usuarios import Usuarios
 from datos.insertar_datos import insertar_usuario
 
@@ -26,4 +26,3 @@ def registrar_usuario():
     sancionado = False #por ser usuario nuevo la sanción directamente es False
     tipo_usuario = input("imgrese si es estudiante/profesor/administrador: ")
     insertar_usuario(nombre, apellido, rut, telefono, correo, sancionado, tipo_usuario)
-
