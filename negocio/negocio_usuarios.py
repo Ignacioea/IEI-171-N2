@@ -4,7 +4,6 @@ from modelos.usuarios import Usuarios
 
 
 def mostrar_usuarios():
-    print("entrando al metodo")
     tabla_usuarios = PrettyTable()
     tabla_usuarios.field_names = ['id','nombre','apellido','rut','telefono','correo','sancionado', 'tipo de usuario']
     lista_usuarios = obtener_lista_objetos(Usuarios)

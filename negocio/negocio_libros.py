@@ -4,7 +4,6 @@ from modelos.libro import Libro
 
 
 def mostrar_libros():
-    print('Preparando tabla')
     tabla_libros = PrettyTable()
     tabla_libros.field_names = ['id', 'titulo', 'editorial', 'anio_publicacion', 'categoria', 'ISBN', 'id_autor']
     lista_libros = obtener_lista_objetos(Libro)

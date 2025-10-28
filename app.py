@@ -1,16 +1,20 @@
 #importar las opciones del menu
 from iu.main_menu import main_menu
-#importar las acciones de negocio
+
+#importar las funciones de negocio
 from negocio.negocio_usuarios import mostrar_usuarios
 from negocio.negocio_ejemplar import mostrar_ejemplar
 from negocio.negocio_libros import mostrar_libros
 
+#de momento se importan para crear funciones y probarlas en este apartado
+from auxiliares.app_info import app_name
+from auxiliares.version import version_number
 
 
-main_menu()
+#main_menu()
 
 mostrar_usuarios()
 
-mostrar_ejemplar()
+#mostrar_ejemplar()
 
-mostrar_libros()
+#mostrar_libros()

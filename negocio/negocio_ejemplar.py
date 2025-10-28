@@ -3,7 +3,6 @@ from datos.obtener_datos import obtener_lista_objetos
 from modelos.ejemplar import Ejemplar
 
 def mostrar_ejemplar():
-    print('Preparando tabla')
     tabla_ejemplar = PrettyTable()
     tabla_ejemplar.field_names = ['id', 'codigo', 'ubicacion', 'estado', 'id_libro']
     lista_ejemplares = obtener_lista_objetos(Ejemplar)
