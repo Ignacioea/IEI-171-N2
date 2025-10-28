@@ -13,7 +13,7 @@ from auxiliares.version import version_number
 
 #main_menu()
 
-mostrar_usuarios()
+#mostrar_usuarios()
 
 #mostrar_ejemplar()
 
