@@ -11,5 +11,4 @@ class Biblioteca(Base):
     correo_contacto = Column(String(100), nullable = False)
     horario_atencion = Column(String(255), nullable = False)
     id_sede = Column(Integer, nullable = False)
-    id_libro = Column(Integer, nullable = False)
 

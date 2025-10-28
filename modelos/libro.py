@@ -12,3 +12,4 @@ class Libro(Base):
     categoria = Column(String(40), nullable = False)
     ISBN = Column(String(13), nullable = False)
     id_autor = Column(Integer, nullable = False)
+    id_biblioteca = Column(Integer, nullable = False)
