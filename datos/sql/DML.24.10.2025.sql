@@ -1,6 +1,6 @@
 USE biblioteca_system;
 
-ALTER TABLE libro MODIFY COLUMN anio_publicacion YEAR;
+ALTER TABLE libro MODIFY COLUMN anio YEAR;
 
 INSERT INTO universidad (nombre, siglas, tipo, web) 
 VALUES
@@ -35,7 +35,7 @@ VALUES
 
 
 
-INSERT INTO libro (titulo, editorial, anio_publicacion, categoria, ISBN, id_autor, id_biblioteca) 
+INSERT INTO libro (titulo, editorial, anio, categoria, ISBN, id_autor, id_biblioteca) 
 VALUES
 ('Object-Oriented Programming in C++', 'Pearson', 2013, 'Programación', '9780672323089', 1, 1),
 ('Computer Networks', 'Pearson', '2011', 'Redes', '9780132126953', 2, 1),
