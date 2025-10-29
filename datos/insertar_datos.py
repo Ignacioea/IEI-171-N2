@@ -1,3 +1,4 @@
+from modelos.prestamo import Prestamo
 from modelos.usuarios import Usuarios
 from datos.conexion import Session
 
@@ -22,5 +23,4 @@ def insertar_usuario(nombre, apellido, rut, telefono, correo, sancionado, tipo_u
 
     finally:
         sesion.close()
-    
     
