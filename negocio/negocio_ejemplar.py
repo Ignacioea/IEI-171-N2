@@ -3,6 +3,8 @@ from datos.obtener_datos import obtener_lista_objetos
 from datos.insertar_datos import insertar_ejemplar
 from modelos.ejemplar import Ejemplar
 
+
+
 def mostrar_ejemplar():
     tabla_ejemplar = PrettyTable()
     tabla_ejemplar.field_names = ['id', 'codigo', 'ubicacion', 'estado', 'id_libro']
@@ -22,3 +24,4 @@ def registrar_ejemplar():
     idlibro = input("ingrese el id del libro correspondiente")
     insertar_ejemplar(codigo, ubicacion, estado, idlibro)
 
+def ejemplar_disponible(id_libro, session)
