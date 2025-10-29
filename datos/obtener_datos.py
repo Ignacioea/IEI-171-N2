@@ -1,10 +1,7 @@
 from datos.conexion import Session
 from sqlalchemy import func
-from modelos.ejemplar import Ejemplar
+
 from modelos.usuarios import Usuarios
-from modelos.libro import Libro
-
-
 
 sesion = Session()
 

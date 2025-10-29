@@ -2,6 +2,7 @@ from prettytable import PrettyTable
 from datos.obtener_datos import obtener_lista_objetos, obtener_usuario_individual
 from modelos.usuarios import Usuarios
 from datos.insertar_datos import insertar_usuario
+from datos.eliminar_datos import eliminar_usuario_por_rut
 
 
 def mostrar_usuarios():
@@ -37,5 +38,20 @@ def buscar_usuario():
     if usuario:
         tabla_usuario.add_row([usuario.id, usuario.nombre, usuario.apellido, usuario.rut, usuario.telefono, usuario.correo, usuario.sancionado, usuario.tipo_usuario])
         print(tabla_usuario)
+        return usuario
     else:
         print("No se encontró el usuario")
+    
+#funcion para eliminar un usuario
+def eliminar_usuario():
+    print("Eliminar Usuario")
+    usuario = buscar_usuario()
+    if usuario:
+        option = input("seguro que desea eliminar este usuario? (s/n): ").lower()
+        if option == "s":
+            eliminar_usuario_por_rut(usuario)
+        else:
+            print("operación cancelada")
+    else:
+        print("no se ha encontrado el usuario. por ende, no se puede eliminar")
+
