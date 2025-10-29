@@ -11,4 +11,4 @@ class Prestamo(Base):
     fecha_devolucion_real = Column(Date, nullable = False)
     multa = Column(Boolean, nullable = False)
     id_usuario = Column(Integer, nullable = False)
-    id_ejempalr = Column(Integer, nullable = False)
+    id_ejemplar = Column(Integer, nullable = False)

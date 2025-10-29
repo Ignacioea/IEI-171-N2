@@ -32,4 +32,5 @@ from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, buscar
 #eliminar_libros() <----- pendiente
 
 #función para buscar usuario, nos puede servir para hacer el update y el delete
+
 buscar_usuario()

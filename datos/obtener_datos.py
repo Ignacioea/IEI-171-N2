@@ -1,7 +1,10 @@
 from datos.conexion import Session
 from sqlalchemy import func
-
+from modelos.ejemplar import Ejemplar
 from modelos.usuarios import Usuarios
+from modelos.libro import Libro
+
+
 
 sesion = Session()
 
@@ -13,4 +16,3 @@ def obtener_lista_objetos(objetoo):
 def obtener_usuario_individual(objeto, rut: str):
         usuario = sesion.query(objeto).filter_by(rut=rut).first()
         return usuario
-
