@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos
-from datos.insertar_datos import insertar_libro
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
+from datos.insertar_datos import insertar_objeto
+from datos.eliminar_datos import eliminar_objeto
 from modelos.libro import Libro
 
 
@@ -24,5 +25,14 @@ def registrar_libro():
     ISBN = input("ingrese el ISBN: ")
     autor = input("ingrese la ID del autor: ")
     biblioteca = input("Ingrese la ID de la biblioteca: ")
-    insertar_libro(titulo, editorial, anio, categoria, ISBN, autor, biblioteca)
-
+    libro = Libro(
+        titulo = titulo,
+        editorial = editorial,
+        anio = anio,
+        categoria = categoria,
+        ISBN = ISBN,
+        id_autor = autor,
+        id_biblioteca = biblioteca
+        )
+    
+    insertar_objeto(libro)

@@ -1,6 +1,6 @@
 from prettytable import PrettyTable
 from datos.obtener_datos import obtener_lista_objetos
-from datos.insertar_datos import insertar_ejemplar
+from datos.insertar_datos import insertar_objeto
 from modelos.ejemplar import Ejemplar
 
 
@@ -22,7 +22,15 @@ def registrar_ejemplar():
     ubicacion = input("ingrese la ubicación del ejemplar: ")
     estado = "Disponible" #todos deben ingresarse en este estado
     idlibro = input("ingrese el id del libro correspondiente")
-    insertar_ejemplar(codigo, ubicacion, estado, idlibro)
+
+    ejemplar = Ejemplar(
+        codigo = codigo,
+        ubicacion = ubicacion,
+        estado = estado,
+        id_libro = idlibro
+    )
+    insertar_objeto(ejemplar)
+
 
 def ejemplar_disponible(id_libro, session):
     pass

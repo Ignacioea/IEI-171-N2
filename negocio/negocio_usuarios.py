@@ -1,8 +1,8 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos, obtener_usuario_individual
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
 from modelos.usuarios import Usuarios
-from datos.insertar_datos import insertar_usuario
-from datos.eliminar_datos import eliminar_usuario_por_rut
+from datos.insertar_datos import insertar_objeto
+from datos.eliminar_datos import eliminar_objeto
 
 
 def mostrar_usuarios():
@@ -26,12 +26,23 @@ def registrar_usuario():
     correo = input("ingrese su correo electrónico: ")
     sancionado = False #por ser usuario nuevo la sanción directamente es False
     tipo_usuario = input("imgrese si es estudiante/profesor/administrador: ")
-    insertar_usuario(nombre, apellido, rut, telefono, correo, sancionado, tipo_usuario)
+
+    usuario = Usuarios(
+        nombre=nombre,
+        apellido = apellido,
+        rut = rut,
+        telefono = telefono,
+        correo = correo,
+        sancionado = sancionado,
+        tipo_usuario = tipo_usuario
+    )
+
+    insertar_objeto(usuario)
 
 #función para buscar un usuario en especifico por su rut
 def buscar_usuario():
     rutuser = input("imgrese el RUT del usuario: ")
-    usuario = obtener_usuario_individual(Usuarios, rutuser)
+    usuario = obtener_objeto_individual(Usuarios, "rut", rutuser)
 
     tabla_usuario = PrettyTable()
     tabla_usuario.field_names = ["id", "nombre", "apellido", "rut", "telefono", "correo", "sanción", "tipo usuario"]
@@ -46,12 +57,12 @@ def buscar_usuario():
 def eliminar_usuario():
     print("Eliminar Usuario")
     usuario = buscar_usuario()
+
     if usuario:
-        option = input("seguro que desea eliminar este usuario? (s/n): ").lower()
-        if option == "s":
-            eliminar_usuario_por_rut(usuario)
+        delete = input("seguro que desea eliminar este usuario? (s/n): ").lower()
+        if delete == "s":
+            eliminar_objeto(usuario)
         else:
             print("operación cancelada")
     else:
-        print("no se ha encontrado el usuario. por ende, no se puede eliminar")
-
+        print("no se ha encontrado el usuario")
