@@ -13,3 +13,4 @@ def obtener_lista_objetos(objetoo):
 def obtener_usuario_individual(objeto, rut: str):
         usuario = sesion.query(objeto).filter_by(rut=rut).first()
         return usuario
+
