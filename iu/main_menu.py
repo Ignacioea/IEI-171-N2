@@ -1,6 +1,6 @@
 from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, modificar_usuario, eliminar_usuario
-from negocio.negocio_libros import mostrar_libros, registrar_libro
-from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar
+from negocio.negocio_libros import mostrar_libros, registrar_libro, modificar_libro
+from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar
 
 
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
@@ -40,7 +40,7 @@ def menu_libros_admin():
         if subnumero == 1:
             registrar_libro()
         elif subnumero == 2:
-            #modificar_libro()
+            modificar_libro()
             break
             
         elif subnumero == 3:
@@ -65,10 +65,10 @@ def menu_ejemplares_admin():
             registrar_ejemplar()
             break
         elif subnumero == 2:
-            #modificar_ejemplar()
+            modificar_ejemplar()
             break
         elif subnumero == 3:
-            #eliminar_ejemplar()
+            eliminar_ejemplar()
             break
         elif subnumero == 4:
             print("saliendo...")

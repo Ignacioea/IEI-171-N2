@@ -1,7 +1,7 @@
 from prettytable import PrettyTable
 from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
 from datos.insertar_datos import insertar_objeto
-from datos.eliminar_datos import eliminar_objeto
+from datos.actualizar_datos import actualizar_objeto
 from modelos.libro import Libro
 
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
@@ -37,5 +37,37 @@ def registrar_libro():
         )
     
     insertar_objeto(libro)
+
+def seleccionar_libro():
+    titulo = input("ingrese el nombre del libro")
+    libro = obtener_objeto_individual(Libro, "titulo", titulo)
+
+    tabla_libros = PrettyTable()
+    tabla_libros.field_names = ["id", "titulo", "editorial", "año", "categoria", "ISBN", "id_autor", "id_biblioteca"]
+
+    if libro:
+        tabla_libros.add_row([libro.id, libro.titulo, libro.editorial, libro.anio, libro.categoria, libro.ISBN, libro.id_autor, libro.id_biblioteca])
+        print(tabla_libros)
+        return libro
+    else:
+        print("no se encontro el libro")
+
+
+def modificar_libro():
+    print("modificar libro")
+    libro = seleccionar_libro()
+    if libro:
+        print("seleccione el atributo que desea cambiar")
+        atributo = input("ingrese el atributo que desea cambiar: ")
+        nuevo_valor = input("ingrese el nuevo valor: ")
+
+        if not atributo or not nuevo_valor:
+            print("no se ha seleccionado atributo o valor válido")
+            return
+        
+        setattr(libro, atributo, nuevo_valor)
+        actualizar_objeto(libro)
+    else:
+        print("no se ha encontrado el libro")
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
