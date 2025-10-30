@@ -3,7 +3,7 @@ from datos.obtener_datos import obtener_lista_objetos
 from datos.insertar_datos import insertar_objeto
 from modelos.ejemplar import Ejemplar
 
-
+########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_ejemplar():
     tabla_ejemplar = PrettyTable()
@@ -31,6 +31,4 @@ def registrar_ejemplar():
     )
     insertar_objeto(ejemplar)
 
-
-def ejemplar_disponible(id_libro, session):
-    pass
+########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################

@@ -1,13 +1,16 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_login
 from modelos.usuarios import Usuarios
 from datos.insertar_datos import insertar_objeto
 from datos.eliminar_datos import eliminar_objeto
+from datos.actualizar_datos import actualizar_objeto
 
 
+
+########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 def mostrar_usuarios():
     tabla_usuarios = PrettyTable()
-    tabla_usuarios.field_names = ['id','nombre','apellido','rut','telefono','correo','sancionado', 'tipo de usuario']
+    tabla_usuarios.field_names = ['id','nombre','apellido','rut','telefono','correo','sancionado', 'tipo_usuario']
     lista_usuarios = obtener_lista_objetos(Usuarios)
     if lista_usuarios:
         for usuario in lista_usuarios:
@@ -45,7 +48,7 @@ def buscar_usuario():
     usuario = obtener_objeto_individual(Usuarios, "rut", rutuser)
 
     tabla_usuario = PrettyTable()
-    tabla_usuario.field_names = ["id", "nombre", "apellido", "rut", "telefono", "correo", "sanción", "tipo usuario"]
+    tabla_usuario.field_names = ["id", "nombre", "apellido", "rut", "telefono", "correo", "sanción", "tipo_usuario"]
     if usuario:
         tabla_usuario.add_row([usuario.id, usuario.nombre, usuario.apellido, usuario.rut, usuario.telefono, usuario.correo, usuario.sancionado, usuario.tipo_usuario])
         print(tabla_usuario)
@@ -66,3 +69,37 @@ def eliminar_usuario():
             print("operación cancelada")
     else:
         print("no se ha encontrado el usuario")
+
+#funcion para modificar un usuario
+def modificar_usuario():
+    print("Modificar Usuario")
+    usuario = buscar_usuario()
+    if usuario:
+        print("seleccione el atributo que desea cambiar")
+        atributo = input("escriba el atributo que desea cambiar: ")
+        nuevo_valor = input("ingrese el nuevo valor: ")
+    
+        if not atributo or not nuevo_valor:
+            print("no se ha seleccionado un atributo o valor válido")
+            return
+    
+        setattr(usuario, atributo, nuevo_valor)
+        actualizar_objeto(usuario)
+    else:
+        print("no se ha encontrado al usuario")
+
+#funcion de login para los usuarios
+def login_usuario():
+    print("########## LOGIN ##########")
+    rut = "15.111.222-4"#input("ingrese su RUT: ") de momento no se va a usar input, para pruebas
+    tipo_usuario = "administrador" #input("ingrese su tipo de usuario (Estudiante/profesor/administrador): ") de momento no se va a usar input, para pruebas
+    usuario = obtener_objeto_login(Usuarios, "rut", rut, "tipo_usuario", tipo_usuario)
+
+    if usuario:
+        print(f"Bienvenido {usuario.nombre} {usuario.apellido}\n")
+        return usuario
+    else:
+        print("ingrese un usuario valido porfavor")
+        return None
+
+########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################

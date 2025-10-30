@@ -4,6 +4,7 @@ from datos.insertar_datos import insertar_objeto
 from datos.eliminar_datos import eliminar_objeto
 from modelos.libro import Libro
 
+########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_libros():
     tabla_libros = PrettyTable()
@@ -36,3 +37,5 @@ def registrar_libro():
         )
     
     insertar_objeto(libro)
+
+########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
