@@ -118,3 +118,19 @@ def tabla_perfil_usuario(usuario):
                 [usuario.nombre, usuario.apellido, usuario.rut, usuario.telefono, usuario.correo, usuario.sancionado, usuario.tipo_usuario])
     
     print(tabla_perfil_usuario)
+
+
+def modificar_perfil(usuario):
+    tabla_perfil_usuario(usuario)
+    print("Modificar perfil")
+    if usuario:
+        print("Selecciona el atributo que deseas cambiar...")
+        atributo = input("ingresa el atributo que deseas cambiar: ")
+        nuevo_valor = input("Ingresa el atributo que quieras cambiar: ")
+        if not atributo or not nuevo_valor:
+            print("No se ha seleccionado un atributo o nuevo valor valido.")
+            return
+        setattr(usuario, atributo, nuevo_valor)
+        actualizar_objeto(usuario)
+    else:
+        print("No se ha encontrado al usuario.")
