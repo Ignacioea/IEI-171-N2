@@ -1,5 +1,5 @@
-from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, modificar_usuario, eliminar_usuario
-from negocio.negocio_libros import mostrar_libros, registrar_libro, modificar_libro
+from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, modificar_usuario, eliminar_usuario, tabla_perfil_usuario
+from negocio.negocio_libros import mostrar_libros, registrar_libro, modificar_libro, mostrar_libros_a_usuario
 from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar
 
 
@@ -101,15 +101,15 @@ def menu_prestamos_administrador():
             print("ingrese un numero válido por favor.")
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
-def menu_perfil_usuario():
+def menu_perfil_usuario(user):
     while True:
-        #mostrar_perfil()
+        tabla_perfil_usuario(user)
         print("Estas son sus opciones con respecto a su perfil: \n")
         print("[1] modificar perfil")
         print("[2] salir")
         subnumero = int(input("seleccione un numero: "))
         if subnumero == 1:
-            #mostrar_retrasos()
+            #modificar_perfil()
             pass
         elif subnumero == 2:
             print("saliendo...")
@@ -118,7 +118,7 @@ def menu_perfil_usuario():
             print("ingrese un numero válido por favor.")
 def menu_libros_usuario():
     while True:
-        #mostrar_libros() se tiene que hacer una función igual a la de mostrar libros, pero con menos información ya que el usuario no puede acceder a toda la info
+        mostrar_libros_a_usuario()
         print("Estas son sus opciones con respecto a los libros: \n")
         print("[1] ver ejemplares disponibles de un libro en especifico")
         print("[2] solicitar libro")

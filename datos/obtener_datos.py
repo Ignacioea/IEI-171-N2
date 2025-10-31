@@ -32,3 +32,13 @@ def obtener_objeto_login(objeto, atributo: str, valor, atributo2: str, valor2):
           return None
     finally:
          sesion.close()
+
+def obtener_objeto_join(objeto1, objeto2, atributo1, atributo2):
+    try:
+        join = sesion.query(objeto1, objeto2).join(objeto2, getattr(objeto1, atributo1) == getattr(objeto2, atributo2)).all()
+        return join
+    except Exception as e:
+         print(f"error al buscar el objeto: {e}")
+         return None
+    finally:
+         sesion.close()

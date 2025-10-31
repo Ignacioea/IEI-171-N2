@@ -19,14 +19,14 @@ from auxiliares.version import version_number
 
 
 #login (cocinando 🐱‍🚀)
+user = login_usuario()
 while True:
     print(f"{app_name} v{version_number}")
-    user = login_usuario()
 
     if not user:
         continue
 
-    if user.tipo_usuario.lower() in ["estudiante", "profesor"]:
+    if user.tipo_usuario.lower() in ["estudiante", "profesor", "docente"]:
         print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
         print("[1] ver mi perfil")
         print("[2] ver libros")
@@ -35,7 +35,7 @@ while True:
         numero = int(input("seleccione un numero: "))
 
         if numero == 1:
-            menu_perfil_usuario()
+            menu_perfil_usuario(user)
         elif numero == 2:
             menu_libros_usuario()
         elif numero == 3:
@@ -70,3 +70,4 @@ while True:
             print("seleccione una opción valida")
     else:
         print("usuario no encontrado.")
+

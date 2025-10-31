@@ -91,8 +91,8 @@ def modificar_usuario():
 #funcion de login para los usuarios
 def login_usuario():
     print("########## LOGIN ##########")
-    rut = "15.111.222-4"#input("ingrese su RUT: ") de momento no se va a usar input, para pruebas
-    tipo_usuario = "administrador" #input("ingrese su tipo de usuario (Estudiante/profesor/administrador): ") de momento no se va a usar input, para pruebas
+    rut = input("ingrese su RUT: ") #de momento no se va a usar input, para pruebas
+    tipo_usuario = input("ingrese su tipo de usuario (Estudiante/profesor/administrador): ") #de momento no se va a usar input, para pruebas
     usuario = obtener_objeto_login(Usuarios, "rut", rut, "tipo_usuario", tipo_usuario)
 
     if usuario:
@@ -103,3 +103,18 @@ def login_usuario():
         return None
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
+
+# Funcion para crear la tabla del usuario logueado.
+def tabla_perfil_usuario(usuario):
+    if not usuario:
+        print("No hay usuario dispomible")
+        return
+    else:
+        print("####### PERFIL DE USUARIO ########")
+    
+        tabla_perfil_usuario = PrettyTable()
+        tabla_perfil_usuario.field_names = ['nombre','apellido','rut','telefono','correo','sancionado', 'tipo_usuario']
+        tabla_perfil_usuario.add_row(
+                [usuario.nombre, usuario.apellido, usuario.rut, usuario.telefono, usuario.correo, usuario.sancionado, usuario.tipo_usuario])
+    
+    print(tabla_perfil_usuario)

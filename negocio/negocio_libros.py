@@ -1,9 +1,10 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_join
 from datos.insertar_datos import insertar_objeto
 from datos.actualizar_datos import actualizar_objeto
 from modelos.libro import Libro
-
+from modelos.autor import Autor
+from datos.conexion import Session
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_libros():
@@ -71,3 +72,16 @@ def modificar_libro():
         print("no se ha encontrado el libro")
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
+
+
+def mostrar_libros_a_usuario():
+    libro = Libro
+    autor = Autor
+    lista_libros = obtener_objeto_join(libro, autor, "id_autor", "id")
+    tabla_libros = PrettyTable()
+    tabla_libros.field_names = ['Título', 'Editorial', 'Año', 'Categoria', 'ISBN', 'Autor']
+    if lista_libros:
+        for libros, autor in lista_libros:
+            tabla_libros.add_row(
+                [libros.titulo, libros.editorial, libros.anio, libros.categoria, libros.ISBN, autor.nombre])
+        print(tabla_libros)
