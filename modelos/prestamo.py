@@ -5,7 +5,7 @@ Base = declarative_base()
 
 class Prestamo(Base):
     __tablename__ = 'prestamo'
-    id_ = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True)
     fecha_prestamo = Column(Date, nullable = False)
     fecha_devolucion_estimado = Column(Date, nullable = True)
     fecha_devolucion_real = Column(Date, nullable = False)

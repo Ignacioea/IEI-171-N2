@@ -18,7 +18,7 @@ from auxiliares.version import version_number
 #buscar_usuario()
 
 
-#login (cocinando 🐱‍🚀)
+# login (cocinando 🐱‍🚀)
 user = login_usuario()
 while True:
     print(f"{app_name} v{version_number}")
@@ -39,7 +39,7 @@ while True:
         elif numero == 2:
             menu_libros_usuario()
         elif numero == 3:
-            ver_prestamos_usuario()
+            ver_prestamos_usuario(user)
         elif numero == 4:
             print("saliendo...")
             break
@@ -70,4 +70,3 @@ while True:
             print("seleccione una opción valida")
     else:
         print("usuario no encontrado.")
-
