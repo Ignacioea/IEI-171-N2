@@ -8,7 +8,7 @@ from modelos.usuarios import Usuarios
 from negocio.negocio_ejemplar import mostrar_ejemplares_disponibles
 from datos.actualizar_datos import actualizar_objeto
 from modelos.ejemplar import Ejemplar
-
+from datos.conexion import Session
 
 
 def registrar_prestamo(user):
@@ -34,21 +34,44 @@ def registrar_prestamo(user):
     ejemplar.estado = "No disponible"
     actualizar_objeto(ejemplar)
 
-def mostrar_prestamo_usuario(user):
-    prestamo = Prestamo
-    usuario = Usuarios
-    lista_prestamo = obtener_objeto_join(prestamo, usuario, "id_usuario", "id")
+def mostrar_prestamo_usuario(usuario):
+    sesion = Session()
+    
+    lista_prestamo = sesion.query(Prestamo, Usuarios, Ejemplar).join(Usuarios, Prestamo.id_usuario == Usuarios.id).join(Ejemplar, Prestamo.id_ejemplar == Ejemplar.id).filter(Usuarios.id == usuario.id).all()
     tabla_prestamos = PrettyTable()
-    tabla_prestamos.field_names = ["Nombre usuario", "RUT", "fecha del prestamo", "fecha de devolucion estimada", "fecha de devolucion real", "multa"]
+    tabla_prestamos.field_names = ["Numero de prestamo", "Nombre usuario", "RUT", "Codigo Ejemplar", "fecha del prestamo", "fecha de devolucion estimada", "fecha de devolucion real", "multa"]
     if not lista_prestamo:
         print("No hay prestamos activos.")
     else:
-        for prestamo, usuario in lista_prestamo:
+        for prestamo, usuario, ejemplar in lista_prestamo:
             tabla_prestamos.add_row(
-                [usuario.nombre, usuario.rut, prestamo.fecha_prestamo, prestamo.fecha_devolucion_estimado, prestamo.fecha_devolucion_real, prestamo.multa]
+                [prestamo.id, usuario.nombre, usuario.rut, ejemplar.codigo, prestamo.fecha_prestamo, prestamo.fecha_devolucion_estimado, prestamo.fecha_devolucion_real, prestamo.multa]
             )
         print(tabla_prestamos)
 
 
-#def devolver_libro():
+def devolver_ejemplar(user):
+    mostrar_prestamo_usuario(user)
+    id_prestamo = input("Ingrese el numero de prestamo: ")
+    codigo_ejemplar = input("Ingrese el codigo del ejemplar a devolver: ")
+    ejemplar = obtener_objeto_individual(Ejemplar, "codigo", codigo_ejemplar)
+    prestamo = obtener_objeto_individual(Prestamo, "id", id_prestamo)
     
+    if not prestamo or not ejemplar:
+        print("Prestamo o ejemplar incorrecto.")
+        return
+    
+    fecha_actual = date.today()
+    prestamo.fecha_devolucion_real = fecha_actual
+    
+    if fecha_actual > prestamo.fecha_devolucion_estimado:
+        prestamo.multa = True
+        print("La entrega esta fuera del plazo, por lo que seras multado.")
+    
+    else: 
+        print("La entrega esta dentro del plazo.")
+    
+    ejemplar.estado = "Disponible"
+    
+    actualizar_objeto(prestamo)
+    actualizar_objeto(ejemplar)
