@@ -1,10 +1,11 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_join
 from datos.insertar_datos import insertar_objeto
 from datos.actualizar_datos import actualizar_objeto
 from datos.eliminar_datos import eliminar_objeto
 from modelos.ejemplar import Ejemplar
-
+from modelos.libro import Libro
+from datos.conexion import Session
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_ejemplar():
@@ -75,3 +76,17 @@ def eliminar_ejemplar():
         print("no se ha encontrado el ejemplar")
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
+
+def mostrar_ejemplares_disponibles():
+    sesion = Session()
+    lista_ejemplares_disp = sesion.query(Ejemplar, Libro).join(Libro, Ejemplar.id_libro == Libro.id).filter(Ejemplar.estado == "Disponible").all()
+    tabla_ejemplares_disp = PrettyTable()
+    tabla_ejemplares_disp.field_names = ["Codigo", "Ubicacion", "Libro"]
+    if not lista_ejemplares_disp:
+        print("No hay ejemplares disponibles")
+    else:
+        for ejemplar, libro in lista_ejemplares_disp:
+            tabla_ejemplares_disp.add_row(
+                [ejemplar.codigo, ejemplar.ubicacion, libro.titulo]
+            )
+        print(tabla_ejemplares_disp)

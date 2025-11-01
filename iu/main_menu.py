@@ -1,6 +1,6 @@
 from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, modificar_usuario, eliminar_usuario, tabla_perfil_usuario, modificar_perfil
 from negocio.negocio_libros import mostrar_libros, registrar_libro, modificar_libro, mostrar_libros_a_usuario
-from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar
+from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar, mostrar_ejemplares_disponibles
 from negocio.negocio_prestamo import mostrar_prestamo_usuario
 
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
@@ -126,7 +126,7 @@ def menu_libros_usuario():
 
         subnumero = int(input("seleccione un numero: "))
         if subnumero == 1:
-            #ver_ejemplares_disponibles()
+            mostrar_ejemplares_disponibles()
             break
         elif subnumero == 2:
             #solicitar_libro()

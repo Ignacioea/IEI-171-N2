@@ -20,53 +20,55 @@ from auxiliares.version import version_number
 
 # login (cocinando 🐱‍🚀)
 user = login_usuario()
-while True:
-    print(f"{app_name} v{version_number}")
+# while True:
+#     print(f"{app_name} v{version_number}")
 
-    if not user:
-        continue
+#     if not user:
+#         continue
 
-    if user.tipo_usuario.lower() in ["estudiante", "profesor", "docente"]:
-        print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
-        print("[1] ver mi perfil")
-        print("[2] ver libros")
-        print("[3] ver mis prestamos")
-        print("[4] salir")
-        numero = int(input("seleccione un numero: "))
+#     if user.tipo_usuario.lower() in ["estudiante", "profesor", "docente"]:
+#         print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
+#         print("[1] ver mi perfil")
+#         print("[2] ver libros")
+#         print("[3] ver mis prestamos")
+#         print("[4] salir")
+#         numero = int(input("seleccione un numero: "))
 
-        if numero == 1:
-            menu_perfil_usuario(user)
-        elif numero == 2:
-            menu_libros_usuario()
-        elif numero == 3:
-            ver_prestamos_usuario(user)
-        elif numero == 4:
-            print("saliendo...")
-            break
-        else:
-                print("seleccione una opción valida")
+#         if numero == 1:
+#             menu_perfil_usuario(user)
+#         elif numero == 2:
+#             menu_libros_usuario()
+#         elif numero == 3:
+#             ver_prestamos_usuario(user)
+#         elif numero == 4:
+#             print("saliendo...")
+#             break
+#         else:
+#                 print("seleccione una opción valida")
 
-    elif user.tipo_usuario.lower() == "administrador":
-        print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
-        print("[1] ver usuarios")
-        print("[2] ver libros")
-        print("[3] ver ejemplares de libros")
-        print("[4] ver prestamos")
-        print("[5] salir")
+#     elif user.tipo_usuario.lower() == "administrador":
+#         print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
+#         print("[1] ver usuarios")
+#         print("[2] ver libros")
+#         print("[3] ver ejemplares de libros")
+#         print("[4] ver prestamos")
+#         print("[5] salir")
 
-        numero = int(input("seleccione un numero: "))
-        if numero == 1:
-            menu_usuarios_admin()
-        elif numero == 2:
-            menu_libros_admin()
-        elif numero == 3:
-            menu_ejemplares_admin()
-        elif numero == 4:
-            menu_prestamos_administrador()
-        elif numero == 5:
-            print("saliendo...")
-            break
-        else:
-            print("seleccione una opción valida")
-    else:
-        print("usuario no encontrado.")
+#         numero = int(input("seleccione un numero: "))
+#         if numero == 1:
+#             menu_usuarios_admin()
+#         elif numero == 2:
+#             menu_libros_admin()
+#         elif numero == 3:
+#             menu_ejemplares_admin()
+#         elif numero == 4:
+#             menu_prestamos_administrador()
+#         elif numero == 5:
+#             print("saliendo...")
+#             break
+#         else:
+#             print("seleccione una opción valida")
+#     else:
+#         print("usuario no encontrado.")
+
+
