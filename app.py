@@ -8,12 +8,6 @@ from negocio.negocio_usuarios import login_usuario
 from auxiliares.app_info import app_name
 from auxiliares.version import version_number
 
-#modificar_ejemplar() <---- pendiente
-#eliminar_ejemplar() <---- pendiente
-
-#modificar_libros() <---- pendiente
-
-
 #función para buscar usuario, nos puede servir para hacer el update y el delete
 #buscar_usuario()
 

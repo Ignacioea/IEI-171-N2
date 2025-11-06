@@ -5,7 +5,7 @@ from datos.insertar_datos import insertar_objeto
 from datos.eliminar_datos import eliminar_objeto
 from datos.actualizar_datos import actualizar_objeto
 
-
+from iu.iu_usuarios import ingresar_datos_usuarios, ingresar_rut_usuario, ingresar_valor_atributo
 
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 def mostrar_usuarios():
@@ -21,30 +21,22 @@ def mostrar_usuarios():
 
 #faltan opciones de validación para no agregar usuarios erroneos
 def registrar_usuario():
-    print("Registro de Nuevo Usuario \n")
-    nombre = input("ingrese nombre: ")
-    apellido = input("ingrese apellido: ")
-    rut = input("ingrese rut (sin puntos ni guión): ")
-    telefono = input("ingrese su numero: ")
-    correo = input("ingrese su correo electrónico: ")
-    sancionado = False #por ser usuario nuevo la sanción directamente es False
-    tipo_usuario = input("imgrese si es estudiante/profesor/administrador: ")
-
+    datos = ingresar_datos_usuarios()
     usuario = Usuarios(
-        nombre=nombre,
-        apellido = apellido,
-        rut = rut,
-        telefono = telefono,
-        correo = correo,
-        sancionado = sancionado,
-        tipo_usuario = tipo_usuario
+        nombre=datos["nombre"],
+        apellido = datos["apellido"],
+        rut = datos["rut"],
+        telefono = datos["telefono"],
+        correo = datos["correo"],
+        sancionado = datos["sancionado"],
+        tipo_usuario = datos["tipo_usuario"]
     )
 
     insertar_objeto(usuario)
 
 #función para buscar un usuario en especifico por su rut
 def buscar_usuario():
-    rutuser = input("imgrese el RUT del usuario: ")
+    rutuser = ingresar_rut_usuario()
     usuario = obtener_objeto_individual(Usuarios, "rut", rutuser)
 
     tabla_usuario = PrettyTable()
@@ -55,7 +47,6 @@ def buscar_usuario():
         return usuario
     else:
         print("No se encontró el usuario")
-    
 #funcion para eliminar un usuario
 def eliminar_usuario():
     print("Eliminar Usuario")
@@ -75,15 +66,12 @@ def modificar_usuario():
     print("Modificar Usuario")
     usuario = buscar_usuario()
     if usuario:
-        print("seleccione el atributo que desea cambiar")
-        atributo = input("escriba el atributo que desea cambiar: ")
-        nuevo_valor = input("ingrese el nuevo valor: ")
-    
-        if not atributo or not nuevo_valor:
+        datos = ingresar_valor_atributo()
+        if not datos["atributo"] or not datos["nuevo_valor"]:
             print("no se ha seleccionado un atributo o valor válido")
             return
-    
-        setattr(usuario, atributo, nuevo_valor)
+        
+        setattr(usuario, datos["atributo"], datos["nuevo_valor"])
         actualizar_objeto(usuario)
     else:
         print("no se ha encontrado al usuario")
