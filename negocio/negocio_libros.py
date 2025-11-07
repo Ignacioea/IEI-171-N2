@@ -1,10 +1,17 @@
 from prettytable import PrettyTable
+#importar datos
 from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_join
 from datos.insertar_datos import insertar_objeto
 from datos.actualizar_datos import actualizar_objeto
+
+#importar modelos
 from modelos.libro import Libro
 from modelos.autor import Autor
-from datos.conexion import Session
+
+#importar iu
+from iu.iu_libros import ingresar_datos_libros, seleccionar_nombre_libro, ingresar_valor_atributo
+
+
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_libros():
@@ -19,28 +26,21 @@ def mostrar_libros():
 
 #falta una confirmación para agregar datos validos y mostrar un mensaje de error
 def registrar_libro():
-    print("Registro de un Nuevo Libro\n")
-    titulo = input("Ingrese el nombre del libro: ")
-    editorial = input("Ingrese el nombre de la editorial: ")
-    anio = input("Ingrese el año de emisión: ")
-    categoria = input("Ingrese la categoría del libro: ")
-    ISBN = input("ingrese el ISBN: ")
-    autor = input("ingrese la ID del autor: ")
-    biblioteca = input("Ingrese la ID de la biblioteca: ")
+    datos = ingresar_datos_libros()
     libro = Libro(
-        titulo = titulo,
-        editorial = editorial,
-        anio = anio,
-        categoria = categoria,
-        ISBN = ISBN,
-        id_autor = autor,
-        id_biblioteca = biblioteca
+        titulo = datos["titulo"],
+        editorial = datos["editorial"],
+        anio = datos["anio"],
+        categoria = datos["categoria"],
+        ISBN = datos["ISBN"],
+        id_autor = datos["autor"],
+        id_biblioteca = datos["biblitoeca"]
         )
     
     insertar_objeto(libro)
 
 def seleccionar_libro():
-    titulo = input("ingrese el nombre del libro")
+    titulo = seleccionar_nombre_libro()
     libro = obtener_objeto_individual(Libro, "titulo", titulo)
 
     tabla_libros = PrettyTable()
@@ -58,21 +58,18 @@ def modificar_libro():
     print("modificar libro")
     libro = seleccionar_libro()
     if libro:
-        print("seleccione el atributo que desea cambiar")
-        atributo = input("ingrese el atributo que desea cambiar: ")
-        nuevo_valor = input("ingrese el nuevo valor: ")
+        datos = ingresar_valor_atributo()
 
-        if not atributo or not nuevo_valor:
+        if not datos["atributo"] or not datos["nuevo_valor"]:
             print("no se ha seleccionado atributo o valor válido")
             return
         
-        setattr(libro, atributo, nuevo_valor)
+        setattr(libro, datos["atributo"], datos["nuevo_valor"])
         actualizar_objeto(libro)
     else:
         print("no se ha encontrado el libro")
 
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
-
 
 def mostrar_libros_a_usuario():
     libro = Libro

@@ -1,26 +1,23 @@
 #importar las opciones del menu
-from iu.main_menu import *
+from iu.iu_menu_administrador import *
+from iu.iu_menu_usuario import *
 
 #importar las funciones de negocio
 from negocio.negocio_usuarios import login_usuario
 
-#auxiliares
+#importar auxiliares
 from auxiliares.app_info import app_name
 from auxiliares.version import version_number
 
-#función para buscar usuario, nos puede servir para hacer el update y el delete
-#buscar_usuario()
 
-
-# login (cocinando 🐱‍🚀)
 user = login_usuario()
 while True:
+
+    if user == None:
+        break
+
     print(f"{app_name} v{version_number}")
-
-    if not user:
-        continue
-
-    if user.tipo_usuario.lower() in ["estudiante", "profesor", "docente"]:
+    if user.tipo_usuario.lower() in ["estudiante", "profesor"]:
         print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
         print("[1] ver mi perfil")
         print("[2] ver libros")
@@ -38,7 +35,7 @@ while True:
             print("saliendo...")
             break
         else:
-                print("seleccione una opción valida")
+            print("seleccione una opción valida")
 
     elif user.tipo_usuario.lower() == "administrador":
         print(f"como {user.tipo_usuario.title()}, estas son sus opciones")
@@ -64,5 +61,3 @@ while True:
             print("seleccione una opción valida")
     else:
         print("usuario no encontrado.")
-
-

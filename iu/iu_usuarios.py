@@ -29,3 +29,13 @@ def ingresar_valor_atributo():
         "atributo": atributo,
         "nuevo_valor": nuevo_valor
     }
+
+def ingresar_login():
+    print("########## LOGIN ##########")
+    rut = input("ingrese su RUT: ")
+    tipo_usuario = input("ingrese su tipo de usuario (Estudiante/profesor/administrador): ")
+    return {
+        "rut": rut,
+        "tipo_usuario": tipo_usuario
+        }
+            

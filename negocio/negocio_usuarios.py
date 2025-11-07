@@ -1,11 +1,18 @@
 from prettytable import PrettyTable
+
+#importar datos
 from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_login
-from modelos.usuarios import Usuarios
 from datos.insertar_datos import insertar_objeto
 from datos.eliminar_datos import eliminar_objeto
 from datos.actualizar_datos import actualizar_objeto
 
-from iu.iu_usuarios import ingresar_datos_usuarios, ingresar_rut_usuario, ingresar_valor_atributo
+#importar modelo
+from modelos.usuarios import Usuarios
+
+#importar iu
+from iu.iu_usuarios import ingresar_datos_usuarios, ingresar_rut_usuario, ingresar_valor_atributo, ingresar_login
+
+
 
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 def mostrar_usuarios():
@@ -47,6 +54,7 @@ def buscar_usuario():
         return usuario
     else:
         print("No se encontró el usuario")
+    
 #funcion para eliminar un usuario
 def eliminar_usuario():
     print("Eliminar Usuario")
@@ -78,10 +86,8 @@ def modificar_usuario():
 
 #funcion de login para los usuarios
 def login_usuario():
-    print("########## LOGIN ##########")
-    rut = input("ingrese su RUT: ") #de momento no se va a usar input, para pruebas
-    tipo_usuario = input("ingrese su tipo de usuario (Estudiante/profesor/administrador): ") #de momento no se va a usar input, para pruebas
-    usuario = obtener_objeto_login(Usuarios, "rut", rut, "tipo_usuario", tipo_usuario)
+    datos = ingresar_login()
+    usuario = obtener_objeto_login(Usuarios, "rut", datos["rut"], "tipo_usuario", datos["tipo_usuario"])
 
     if usuario:
         print(f"Bienvenido {usuario.nombre} {usuario.apellido}\n")
@@ -112,13 +118,11 @@ def modificar_perfil(usuario):
     tabla_perfil_usuario(usuario)
     print("Modificar perfil")
     if usuario:
-        print("Selecciona el atributo que deseas cambiar...")
-        atributo = input("ingresa el atributo que deseas cambiar: ")
-        nuevo_valor = input("Ingresa el atributo que quieras cambiar: ")
-        if not atributo or not nuevo_valor:
+        datos = ingresar_valor_atributo()
+        if not datos["atributo"] or not datos["nuevo_valor"]:
             print("No se ha seleccionado un atributo o nuevo valor valido.")
             return
-        setattr(usuario, atributo, nuevo_valor)
+        setattr(usuario, datos["atributo"], datos["nuevo_valor"])
         actualizar_objeto(usuario)
     else:
         print("No se ha encontrado al usuario.")

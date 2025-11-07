@@ -1,11 +1,20 @@
 from prettytable import PrettyTable
-from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual, obtener_objeto_join
+
+#importar datos
+from datos.obtener_datos import obtener_lista_objetos, obtener_objeto_individual
 from datos.insertar_datos import insertar_objeto
 from datos.actualizar_datos import actualizar_objeto
 from datos.eliminar_datos import eliminar_objeto
+
+#importar modelos
 from modelos.ejemplar import Ejemplar
 from modelos.libro import Libro
+
+#importar iu
+from iu.iu_ejemplar import ingresar_datos_ejemplar, ingresar_codigo, ingresar_valor_atributo, pregunta_delete
+
 from datos.conexion import Session
+
 ########################################## FUNCIONES PARA EL MENU DE ADMINISTRADOR ##########################################
 
 def mostrar_ejemplar():
@@ -20,22 +29,17 @@ def mostrar_ejemplar():
             
 #faltan opciones de validación para no agregar ejemplares erroneos
 def registrar_ejemplar():
-    print("Registro de Nuevo Ejemplar \n")
-    codigo = input("ingrese el codigo del ejemplar: ")
-    ubicacion = input("ingrese la ubicación del ejemplar: ")
-    estado = "Disponible" #todos deben ingresarse en este estado
-    idlibro = input("ingrese el id del libro correspondiente")
-
+    datos = ingresar_datos_ejemplar()
     ejemplar = Ejemplar(
-        codigo = codigo,
-        ubicacion = ubicacion,
-        estado = estado,
-        id_libro = idlibro
+        codigo = datos["codigo"],
+        ubicacion = datos["ubicacion"],
+        estado = datos["estado"],
+        id_libro = datos["idlibro"]
     )
     insertar_objeto(ejemplar)
 
 def seleccionar_ejemplar():
-    codigo_ejemplar = input("ingrese el codigo del ejemplar que desea seleccionar: ")
+    codigo_ejemplar = ingresar_codigo()
     ejemplar = obtener_objeto_individual(Ejemplar, "codigo", codigo_ejemplar)
 
     tabla_ejemplar = PrettyTable()
@@ -51,13 +55,11 @@ def modificar_ejemplar():
     print("Modificar Ejemplar")
     ejemplar = seleccionar_ejemplar()
     if ejemplar:
-        print("Seleccione el atributo que desea cambiar")
-        atributo = input("ingrese el atributo que desea cambiar: ")
-        nuevo_valor = input("ingrese el nuevo valor: ")
-        if not atributo or not nuevo_valor:
+        datos = ingresar_valor_atributo()
+        if not datos["atributo"] or not datos["nuevo_valor"]:
             print("no se ha seleccionado atributo o valor válido")
             return
-        setattr(ejemplar, atributo, nuevo_valor)
+        setattr(ejemplar, datos["atributo"], datos["nuevo_valor"])
         actualizar_objeto(ejemplar)
     else:
         print("no se ha encontrado el ejemplar")
@@ -67,7 +69,7 @@ def eliminar_ejemplar():
     ejemplar = seleccionar_ejemplar()
 
     if ejemplar:
-        delete = input("seguro que desea eliminar este ejemplar? (s/n): ").lower()
+        delete = pregunta_delete()
         if delete == "s":
             eliminar_objeto(ejemplar)
         else:
@@ -75,33 +77,7 @@ def eliminar_ejemplar():
     else:
         print("no se ha encontrado el ejemplar")
 
-def mostrar_ejemplar_libro():
-    sesion = Session()
-    nombre_libro = input("Ingrese el nombre del libro: ").strip()
-    
-    libro = sesion.query(Libro).filter(Libro.titulo.ilike(f"%{nombre_libro}%")).first()
-
-    if not libro:
-        print("No se encontró ningún libro con ese nombre.")
-        return
-
-    ejemplares = sesion.query(Ejemplar).filter(Ejemplar.id_libro == libro.id).all()
-
-    if not ejemplares:
-        print(f"No hay ejemplares registrados del libro '{libro.nombre}'.")
-        return
-
-    tabla = PrettyTable()
-    tabla.field_names = ["Código","Ubicacion", "Estado", ]
-
-    for ej in ejemplares:
-        tabla.add_row([ej.codigo, ej.ubicacion, ej.estado])
-
-    print(tabla)
-
-    
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
-
 
 def mostrar_ejemplares_disponibles():
     sesion = Session()
