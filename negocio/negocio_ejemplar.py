@@ -75,7 +75,33 @@ def eliminar_ejemplar():
     else:
         print("no se ha encontrado el ejemplar")
 
+def mostrar_ejemplar_libro():
+    sesion = Session()
+    nombre_libro = input("Ingrese el nombre del libro: ").strip()
+    
+    libro = sesion.query(Libro).filter(Libro.titulo.ilike(f"%{nombre_libro}%")).first()
+
+    if not libro:
+        print("No se encontró ningún libro con ese nombre.")
+        return
+
+    ejemplares = sesion.query(Ejemplar).filter(Ejemplar.id_libro == libro.id).all()
+
+    if not ejemplares:
+        print(f"No hay ejemplares registrados del libro '{libro.nombre}'.")
+        return
+
+    tabla = PrettyTable()
+    tabla.field_names = ["Código","Ubicacion", "Estado", ]
+
+    for ej in ejemplares:
+        tabla.add_row([ej.codigo, ej.ubicacion, ej.estado])
+
+    print(tabla)
+
+    
 ########################################## FUNCIONES PARA EL MENU DE USUARIO ##########################################
+
 
 def mostrar_ejemplares_disponibles():
     sesion = Session()
