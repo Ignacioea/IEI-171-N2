@@ -4,7 +4,7 @@ from datetime import date, timedelta
 #importar datos
 from datos.insertar_datos import insertar_objeto
 from datos.actualizar_datos import actualizar_objeto
-from datos.obtener_datos import obtener_objeto_individual
+from datos.obtener_datos import obtener_objeto_individual, obtener_lista_objetos
 
 #importar modelos
 from modelos.prestamo import Prestamo
@@ -19,6 +19,14 @@ from iu.iu_negocio import ingresar_codigo, ingresar_datos_prestamo
 
 from datos.conexion import Session
 
+def mostrar_prestamos():
+    tabla_prestamos = PrettyTable()
+    tabla_prestamos.field_names = ['id','fecha_prestamo','fecha devolución estimado','fecha devolucion real','multa','id usuario','id ejemlpar']
+    lista_prestamos = obtener_lista_objetos(Prestamo)
+    if lista_prestamos:
+        for prestamo in lista_prestamos:
+            tabla_prestamos.add_row([prestamo.id,prestamo.fecha_prestamo,prestamo.fecha_devolucion_estimado,prestamo.fecha_devolucion_real,prestamo.multa,prestamo.id_usuario,prestamo.id_ejemplar])
+        print(tabla_prestamos)
 
 def registrar_prestamo(user):
     mostrar_ejemplares_disponibles()

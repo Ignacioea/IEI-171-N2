@@ -1,6 +1,7 @@
 from negocio.negocio_usuarios import mostrar_usuarios, registrar_usuario, modificar_usuario, eliminar_usuario
 from negocio.negocio_libros import mostrar_libros, registrar_libro, modificar_libro
-from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar
+from negocio.negocio_ejemplar import mostrar_ejemplar, registrar_ejemplar, modificar_ejemplar, eliminar_ejemplar, mostrar_ejemplar_libro
+from negocio.negocio_prestamo import mostrar_prestamos
 
 def menu_usuarios_admin():
     while True:
@@ -42,7 +43,7 @@ def menu_libros_admin():
             break
             
         elif subnumero == 3:
-            #buscar_ejemplar() la idea esta en hacer algo similar con lo de buscar usuario
+            mostrar_ejemplar_libro()
             break
         elif subnumero == 4:
             print("saliendo...")
@@ -76,23 +77,11 @@ def menu_ejemplares_admin():
 
 def menu_prestamos_administrador(): 
     while True:       
-        #mostrar_prestamos()
+        mostrar_prestamos()
         print("Estas son sus opciones con respecto a los prestamos: \n")
-        print("[1] mostrar prestamos retrasados")
-        print("[2] aplicar sanción")
-        print("[3] ver sanciones")
-        print("[3] salir")
+        print("[1] salir")
         subnumero = int(input("seleccione un numero: "))
         if subnumero == 1:
-            #mostrar_retrasos()
-            break
-        elif subnumero == 2:
-            #aplicar_sancion()
-            break
-        elif subnumero == 3:
-            #ver_sanciones()
-            break
-        elif subnumero == 4:
             print("saliendo...")
             break
         else: 
